@@ -13,6 +13,10 @@ def home():
 def classify():
     try:
         data = request.get_json()
+        
+        if data is None:
+            return jsonify({"status": "error", "message": "No JSON payload received"}), 400
+
         ticket = handle_incoming_message(data)
         return jsonify({
             "status": "success",
