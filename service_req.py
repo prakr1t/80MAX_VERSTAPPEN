@@ -16,7 +16,7 @@ def create_service_request(category, sender, message):
     print(f"Message: {message}")
     print("="*40)
 
-
+"""
 def handle_incoming_message(message_dict):
     message = parse_message(message_dict)
     category = classify_issue(message)
@@ -26,5 +26,31 @@ def handle_incoming_message(message_dict):
     message = parse_message(message_dict)
     category = classify_issue(message)
     create_service_request(category, message_dict["sender"], message)
+"""
+
+from parser import classify_message
+from categories import get_assigned_team
+
+def handle_incoming_message(data):
+    email = data.get("email")
+    message = data.get("message")
+
+    category = classify_message(message)
+    assigned_to = get_assigned_team(category)
+
+    ticket = {
+        "from": email,
+        "category": category,
+        "assigned_to": assigned_to,
+        "message": message
+    }
+
+    # Keep printing to terminal (for logs/debug)
+    print("Ticket Created!")
+    for k, v in ticket.items():
+        print(f"{k.capitalize()}: {v}")
+    print("=" * 30)
+
+    return ticket
 
 handle_incoming_message(incoming_message)
