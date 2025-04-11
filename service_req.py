@@ -32,11 +32,11 @@ def handle_incoming_message(message_dict):
 
 def handle_incoming_message(data):
     email = data.get("email")
-    message = data.get("message")
+    message = parse_message(data) 
 
-    category = parse_message(message)
+    category = classify_issue(message) 
     print(f"[DEBUG] Category received: '{category}'")
-    assigned_to =category_to_department[category]
+    assigned_to = category_to_department.get(category, "general_support@company.com")
 
     ticket = {
         "from": email,
