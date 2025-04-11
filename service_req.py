@@ -35,7 +35,7 @@ def handle_incoming_message(data):
     message = data.get("message")
 
     category = parse_message(message)
-    assigned_to =category_to_department(category)
+    assigned_to =category_to_department[category]
 
     ticket = {
         "from": email,
