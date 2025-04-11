@@ -2,7 +2,7 @@ from categories import category_to_department
 from parser import classify_issue, parse_message
 from mock_input import incoming_message
 from parser import parse_message
-from categories import get_assigned_team
+from categories import category_to_department
 
 
 def map_to_department(category):
