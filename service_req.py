@@ -1,7 +1,7 @@
 from categories import category_to_department
 from parser import classify_issue, parse_message
 from mock_input import incoming_message
-from parser import classify_message
+from parser import parse_message
 from categories import get_assigned_team
 
 
@@ -34,7 +34,7 @@ def handle_incoming_message(data):
     email = data.get("email")
     message = data.get("message")
 
-    category = classify_message(message)
+    category = parse_message(message)
     assigned_to = get_assigned_team(category)
 
     ticket = {
