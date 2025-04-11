@@ -2,8 +2,9 @@ from xml.parsers.expat import model
 
 
 def parse_message(message_dict):
-    #return message_dict["message"]
-    return message_dict.get("text", "")
+    if not isinstance(message_dict, dict):
+        return ""
+    return message_dict.get("message") or message_dict.get("text", "")  
 
 def classify_issue(message):
     message = message.lower()
